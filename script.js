@@ -110,7 +110,15 @@ equals.addEventListener("click", () => {
 
 signChanger.addEventListener("click", () => {
     if(display.textContent.startsWith("-")){
-        display.textContent = display.textContent.substring(1);
+        if(display.textContent === "-"){
+            display.textContent = "0";
+        }
+        else{
+            display.textContent = display.textContent.substring(1);
+        }
+    }
+    else if(display.textContent === "0"){
+        display.textContent = "-0";
     }
     else{
         display.textContent = "-" + display.textContent;
