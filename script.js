@@ -1,11 +1,23 @@
 function sum(num1, num2){
     num1 = Number(num1);
     num2 = Number(num2);
-    return num1 + num2;
+    let result = num1 + num2;
+    if(result > 100000000000){
+        return result.toExponential(5);
+    }
+    else{
+        return result;
+    }
 }
 
 function subtract(num1, num2){
-    return num1 - num2;
+    let result = num1 - num2;
+    if(result > 100000000000){
+        return result.toExponential(5);
+    }
+    else{
+        return result;
+    }
 }
 
 function divide(num1, num2){
@@ -14,7 +26,13 @@ function divide(num1, num2){
 }
 
 function multiply(num1, num2){
-    return num1 * num2;
+    let result = num1 * num2;
+    if(result > 100000000000){
+        return result.toExponential(5);
+    }
+    else{
+        return result;
+    }
 }
 
 function operate (num1, operater, num2){
@@ -33,6 +51,7 @@ const backspace = document.querySelector(".del");
 const operators = document.querySelectorAll(".operator");
 const listOfOperations = ["+", "-", "/", "*"];
 const equals = document.querySelector(".equals");
+const signChanger = document.querySelector(".sign-change");
 
 let firstNumber;
 let operation;
@@ -41,6 +60,10 @@ let secondNumber;
 numButtons.forEach(button => {
     button.addEventListener("click", event =>{
         let buttonClicked = event.target;
+
+        if(display.textContent.length >= 12){
+            return;
+        }
 
         if(display.textContent.split('').includes('.') && buttonClicked.textContent === '.'){
             return;
@@ -83,4 +106,13 @@ equals.addEventListener("click", () => {
     secondNumber = display.textContent;
     let result = operate(firstNumber, operation, secondNumber);
     display.textContent = result;
+});
+
+signChanger.addEventListener("click", () => {
+    if(display.textContent.startsWith("-")){
+        display.textContent = display.textContent.substring(1);
+    }
+    else{
+        display.textContent = "-" + display.textContent;
+    }
 });
